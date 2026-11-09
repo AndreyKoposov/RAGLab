@@ -6,3 +6,27 @@ services:
     volumes:
       - ./uploads:/app/uploads 
     restart: unless-stopped
+    networks:
+      - app_network
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PSWRD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - raglab:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+volumes:
+  raglab:
+    name: 
+      raglab
+
+networks:
+  app_network:
+    driver: bridge

@@ -11,7 +11,10 @@ from pydantic import BaseModel
 
 from app import database
 from app.ai.engine import engine
+from app.rag import RAGStore
 
+
+rag = RAGStore()
 
 BASE_DIR = Path(__file__).parent
 STATIC_DIR = BASE_DIR / "static"
@@ -64,7 +67,8 @@ def chat(payload: ChatRequest) -> ChatResponse:
     else:
         reply = f"Бот получил: «{user_text}». (Это заглушка, скоро подключим ИИ)"
 
-    reply = engine.chat(user_text)
+    prompt = rag.build_prompt(user_text, top_k=4)
+    reply = engine.chat(prompt)
 
     # Каркас: сохраняем сообщения (сейчас — no-op)
     database.save_message(payload.user_id, user_text)
@@ -99,6 +103,7 @@ def upload_pdf(file: UploadFile = File(...)) -> UploadResponse:
         )
 
     _log_pdf_text(content, original_name)
+    n_chunks = rag.add_pdf(original_name, content)
 
     # 4) Сохраняем под уникальным именем, чтобы не перезаписывать
     safe_id = uuid.uuid4().hex
@@ -121,7 +126,7 @@ def _log_pdf_text(content: bytes, name: str) -> None:
     try:
         reader = PdfReader(io.BytesIO(content))
     except Exception as e:
-        # logger.warning("Не удалось открыть PDF «%s»: %s", name, e)
+        print(f"Не удалось открыть PDF «{name}»: {e}")
         return
 
     pages_text = []
@@ -129,7 +134,7 @@ def _log_pdf_text(content: bytes, name: str) -> None:
         try:
             text = page.extract_text() or ""
         except Exception as e:
-            # logger.warning("Страница %d файла «%s»: ошибка извлечения: %s", i, name, e)
+            print(f"Страница {i} файла «{name}»: ошибка извлечения: {e}")
             text = ""
         pages_text.append(text)
 
@@ -137,6 +142,6 @@ def _log_pdf_text(content: bytes, name: str) -> None:
 
     # Печатаем в лог ТОЛЬКО текст (без имён файлов, размеров и т.п.)
     if full_text:
-        print(f"PDF text [{name}]:\n{content}")
+        print(f"PDF text [{name}]:\n{full_text}")
     else:
         print(f"PDF text {name}: <текст не найден — возможно, скан или картинки>")

@@ -3,3 +3,5 @@ uvicorn[standard]==0.32.0
 python-multipart==0.0.12
 pypdf==5.1.0
 gigachat
+numpy
+fastembed
