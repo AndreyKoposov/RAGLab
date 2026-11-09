@@ -10,6 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from app import database
+from app.ai.engine import engine
 
 
 BASE_DIR = Path(__file__).parent
@@ -62,6 +63,8 @@ def chat(payload: ChatRequest) -> ChatResponse:
         reply = "Пожалуйста, напиши что-нибудь 🙂"
     else:
         reply = f"Бот получил: «{user_text}». (Это заглушка, скоро подключим ИИ)"
+
+    reply = engine.chat(user_text)
 
     # Каркас: сохраняем сообщения (сейчас — no-op)
     database.save_message(payload.user_id, user_text)
