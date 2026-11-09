@@ -26,8 +26,29 @@
         .msg { margin: 6px 0; padding: 8px 12px; border-radius: 8px; max-width: 80%; }
         .user { background: #dcf8c6; margin-left: auto; text-align: right; }
         .bot  { background: #eaeaea; }
-        #form { display: flex; gap: 8px; }
+        .file-link { color: #1a5fb4; text-decoration: underline; }
+
+        #form { display: flex; gap: 8px; align-items: center; }
         #input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+
+        /* Стилизованная кнопка прикрепления файла */
+        .attach-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #eef2f7;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+        }
+        .attach-btn:hover { background: #dde7f2; }
+        .attach-btn.disabled { opacity: 0.5; pointer-events: none; }
+        #fileInput { display: none; }
+
         button { padding: 10px 16px; border: none; border-radius: 8px; background: #4a90e2; color: white; cursor: pointer; }
         button:disabled { background: #aaa; }
     </style>
@@ -35,12 +56,16 @@
 <body>
     <h1>💬 Чат с AI-ботом</h1>
     <div id="messages"></div>
+
     <form id="form">
+        <!-- Кнопка-обёртка над скрытым input -->
+        <label for="fileInput" class="attach-btn" id="attachBtn" title="Прикрепить PDF">📎</label>
+        <input id="fileInput" type="file" accept="application/pdf,.pdf" />
+
         <input id="input" type="text" placeholder="Напиши сообщение..." autocomplete="off" />
         <button type="submit" id="send">Отправить</button>
     </form>
 
-    <!-- Подключаем наш JS -->
     <script src="/static/script.js"></script>
 </body>
 </html>
