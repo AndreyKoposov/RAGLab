@@ -5,3 +5,4 @@ pypdf==5.1.0
 gigachat
 numpy
 fastembed
+openai

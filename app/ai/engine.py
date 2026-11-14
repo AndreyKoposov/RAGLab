@@ -46,6 +46,9 @@ class AIEngine():
             case 'GigaChat':
                 from . import gigachat
                 return gigachat.GigaChatEngine(AI_API_KEY, AI_MODEL, int(AI_TEMP))
+            case 'Qwen':
+                from . import qwen
+                return qwen.QwenEngine(AI_API_KEY, AI_MODEL, int(AI_TEMP))
             case _:
                 raise ValueError("Unknown AI engine!")
 
