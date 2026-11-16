@@ -1,0 +1,594 @@
+/* Глобальный сброс и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: #f3f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Главный контейнер двух колонок */
+.app {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Левая колонка — список процессов (как список чатов) */
+.process-list {
+    width: 15%;
+    background: #f8fafd;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 0 0;
+}
+
+.ai-chat {
+    width: 25%;
+    background: #f8fafd;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 0 0;
+}
+
+.process-list-header {
+    padding: 0 20px 20px 20px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #0b1e33;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.process-list-header span {
+    background: #d4e2f0;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1e3a5f;
+}
+
+.process-list-header span:first-child {
+    flex: 1;
+}
+
+.process-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Стилизация скролла под современный чат */
+.process-items::-webkit-scrollbar {
+    width: 5px;
+}
+
+.process-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.process-items::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 20px;
+}
+
+/* Элемент процесса — в точности как чат */
+.process-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 4px 4px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0, 20, 40, 0.03);
+    border: 1px solid #edf2f7;
+    transition: all 0.15s ease;
+    cursor: default;
+    position: relative;
+}
+
+.process-item:hover {
+    background: #f0f4fe;
+    border-color: #bdd3f0;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px -12px rgba(30, 60, 130, 0.2);
+}
+
+.process-info {
+    flex: 1;
+    min-width: 0; /* Для корректного усечения текста */
+}
+
+/* Аватарка процесса — как иконка чата */
+.process-avatar {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(145deg, #e0eaff, #cddef7);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1f3a6b;
+    font-weight: 600;
+    font-size: 18px;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 8px rgba(0,20,50,0.1);
+}
+
+.process-info {
+    flex: 1;
+}
+
+.process-name-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.process-name {
+    font-weight: 600;
+    color: #0b2b4f;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.process-meta {
+    font-size: 12px;
+    color: #5e718d;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.badge {
+    background: #dee9fc;
+    color: #1f3a6b;
+    padding: 2px 10px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.process-footer {
+    padding: 18px 20px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 13px;
+    color: #6a7f9f;
+}
+
+.hide-sidebar-btn {
+    border: none;
+    width: 1.5%;
+}
+
+.hide-sidebar-btn:hover {
+    border: none;
+    background: #d4e2f0;
+    width: 1.5%;
+}
+
+/* Правый основной блок */
+.main-panel {
+    flex: 1;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Панель с шестью кнопками */
+.button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 10px;
+    border-bottom: 1px solid #eef2f6;
+    background: white;
+    padding-top: 8px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 5px 22px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 40px;
+    color: #415a77;
+    cursor: pointer;
+    transition: 0.15s;
+    border: 1px solid transparent;
+    background: #f1f5f9;
+    flex: 0 1 auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.tab-btn:hover {
+    background: #e4ecf7;
+    color: #0f2b48;
+    border-color: #b8ccf0;
+}
+
+.tab-btn.active {
+    background: #1f3a6b;
+    color: white;
+    box-shadow: 0 8px 16px -6px #1f3a6b70;
+    border-color: #1f3a6b;
+}
+
+/* Контент правой панели */
+.content-area {
+    flex: 1;
+    padding: 28px;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+.content-card {
+    background: #f9fcff;
+    border-radius: 28px;
+    padding: 32px;
+    min-height: 100%;
+    border: 1px solid #eef4fa;
+    box-shadow: inset 0 2px 6px rgba(255,255,255,0.8), 0 12px 24px -20px #1e293b;
+}
+
+.content-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #0b2b4f;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.content-title span {
+    background: #e2eaf8;
+    padding: 4px 14px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1e3a5f;
+}
+
+.placeholder-text {
+    color: #476085;
+    font-size: 17px;
+    line-height: 1.6;
+    border-left: 5px solid #aac3e0;
+    padding-left: 24px;
+    margin-top: 16px;
+}
+
+.tags-container {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ontology-tag {
+    display: inline-block;
+    background: white;
+    border-radius: 50px;
+    padding: 8px 20px;
+    border: 1px solid #d5e2f5;
+    color: #1d3d6d;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    font-weight: 450;
+    box-shadow: 0 2px 6px #deecfd;
+}
+
+/* Индикатор состояния соединения */
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background: #f8fafd;
+    border-bottom: 1px solid #eef2f6;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.status-indicator.online {
+    background: #10b981;
+    color: #10b981;
+}
+
+.status-indicator.offline {
+    background: #ef4444;
+    color: #ef4444;
+}
+
+.status-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+/* Адаптивность */
+@media (max-width: 700px) {
+    .app { 
+        flex-direction: column; 
+    }
+    .process-list { 
+        width: 100%; 
+        border-right: none; 
+        border-bottom: 1px solid #e2e8f0; 
+    }
+}
+
+.add-process-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1f3a6b;
+    color: white;
+    border: none;
+    font-size: 22px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(31, 58, 107, 0.2);
+    line-height: 1;
+    padding-bottom: 2px;
+}
+
+.add-process-btn:hover {
+    background: #2c4c8a;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(31, 58, 107, 0.3);
+}
+
+.add-process-btn:active {
+    transform: scale(0.95);
+}
+
+.process-count {
+    background: #d4e2f0;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1e3a5f;
+    white-space: nowrap;
+}
+
+.edit-process-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: transparent;
+    color: #7f8fa6;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    padding: 0;
+    line-height: 1;
+}
+
+.process-item:hover .edit-process-btn {
+    opacity: 1;
+    color: #1f3a6b;
+}
+
+.edit-process-btn:hover {
+    background: #e3eaf3;
+    transform: scale(1.1);
+    color: #1f3a6b;
+    opacity: 1;
+}
+
+/* Модальное окно для редактирования/добавления */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: white;
+    border-radius: 28px;
+    padding: 32px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1);
+}
+
+.modal h3 {
+    color: #0b2b4f;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    transition: all 0.2s ease;
+    background: #f8fafd;
+}
+
+.modal-input:focus {
+    outline: none;
+    border-color: #1f3a6b;
+    background: white;
+    box-shadow: 0 4px 12px rgba(31, 58, 107, 0.1);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.modal-btn.cancel {
+    background: #f1f5f9;
+    color: #415a77;
+}
+
+.modal-btn.cancel:hover {
+    background: #e2e8f0;
+}
+
+.modal-btn.save {
+    background: #1f3a6b;
+    color: white;
+    box-shadow: 0 8px 16px -6px #1f3a6b70;
+}
+
+.modal-btn.save:hover {
+    background: #2c4c8a;
+    transform: translateY(-2px);
+}
+
+/* Принудительное растяжение для Eel */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Предотвращает скролл на уровне body */
+}
+
+body {
+    display: flex;
+    padding: 0; /* Убираем отступы */
+}
+
+.app {
+    max-width: none; /* Убираем максимальную ширину */
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0; /* Убираем скругление для более нативного вида */
+    margin: 0;
+    box-shadow: none; /* Убираем тень */
+    border: none; /* Убираем границу */
+}
+
+/* Адаптируем внутренние отступы */
+.process-list {
+    padding-top: 16px;
+}
+
+.process-list-header {
+    padding: 0 20px 16px 20px;
+}
+
+/* Увеличиваем область контента */
+.content-area {
+    padding: 20px;
+}
+
+/* Для очень маленьких экранов оставляем возможность скролла */
+@media (max-width: 700px) {
+    body {
+        overflow: auto;
+    }
+    
+    .app {
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
+/* Стили для выделенного процесса */
+.process-item.selected {
+    background: #e1eaf8;
+    border-color: #1f3a6b;
+    border-left-width: 4px;
+    box-shadow: 0 6px 12px -8px #1f3a6b;
+    transform: translateX(2px);
+}
+
+.process-item.selected .process-avatar {
+    background: linear-gradient(145deg, #b8d0f0, #a0bae8);
+    color: #0a1a2f;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.9), 0 4px 8px rgba(20, 60, 120, 0.3);
+}
+
+.process-item.selected .process-name {
+    color: #0a1a2f;
+    font-weight: 700;
+}
+
+.process-item.selected .edit-process-btn {
+    color: #1f3a6b;
+    opacity: 1;
+}

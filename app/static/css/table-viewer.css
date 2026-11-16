@@ -1,0 +1,330 @@
+/* Контейнер таблицы */
+.table-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Заголовок таблицы */
+.table-header {
+    padding: 16px 24px;
+    background: #f8fafd;
+    border-bottom: 1px solid #eef2f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.table-header h3 {
+    color: #0b2b4f;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.table-header h3 span {
+    background: #e2eaf8;
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1e3a5f;
+}
+
+/* Счетчик записей */
+.table-count-badge {
+    background: #1f3a6b;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Область таблицы со скроллом */
+.table-wrapper {
+    flex: 1;
+    overflow: auto;
+    background: white;
+    min-height: 0;
+    border-bottom: 1px solid #eef2f6;
+}
+
+/* Стилизация скролла */
+.table-wrapper::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Таблица */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 600px;
+}
+
+/* Заголовки столбцов */
+.data-table thead tr {
+    background: #f8fafd;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.data-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: #0b2b4f;
+    font-size: 14px;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    background: #f8fafd;
+    z-index: 10;
+}
+
+.data-table th:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: #e2e8f0;
+}
+
+.data-table th:first-child {
+    padding-left: 24px;
+}
+
+.data-table th:last-child {
+    padding-right: 24px;
+}
+
+/* Ячейки таблицы */
+.data-table td {
+    padding: 14px 20px;
+    color: #1e293b;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: top;
+}
+
+.data-table td:first-child {
+    padding-left: 24px;
+}
+
+.data-table td:last-child {
+    padding-right: 24px;
+}
+
+/* Строки таблицы */
+.data-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f0f4fe;
+}
+
+/* Пустое состояние */
+.table-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    color: #94a3b8;
+    font-size: 16px;
+    min-height: 300px;
+}
+
+.table-empty-icon {
+    font-size: 48px;
+    opacity: 0.5;
+}
+
+/* Панель инструментов */
+.table-toolbar {
+    padding: 16px 24px;
+    background: #f8fafd;
+    border-top: 1px solid #eef2f6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.table-toolbar-left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+}
+
+.table-toolbar-right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Кнопки */
+.table-btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: #1f3a6b;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.table-btn:hover {
+    background: #e4ecf7;
+    border-color: #b8ccf0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(31, 58, 107, 0.1);
+}
+
+.table-btn:active {
+    transform: translateY(0);
+}
+
+.table-btn.primary {
+    background: #1f3a6b;
+    color: white;
+    border-color: #1f3a6b;
+    box-shadow: 0 4px 12px rgba(31, 58, 107, 0.25);
+}
+
+.table-btn.primary:hover {
+    background: #2c4c8a;
+}
+
+.table-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Информация о таблице */
+.table-info {
+    color: #64748b;
+    font-size: 13px;
+    display: flex;
+    gap: 20px;
+}
+
+.table-info-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.table-info-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+}
+
+/* Индикатор загрузки */
+.table-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    backdrop-filter: blur(2px);
+}
+
+.table-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #1f3a6b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Фильтр поиска */
+.table-search {
+    padding: 8px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 30px;
+    font-size: 14px;
+    min-width: 250px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.table-search:focus {
+    border-color: #1f3a6b;
+    box-shadow: 0 4px 12px rgba(31, 58, 107, 0.1);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .table-toolbar-left {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .table-search {
+        width: 100%;
+    }
+    
+    .table-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 12px 16px;
+    }
+}

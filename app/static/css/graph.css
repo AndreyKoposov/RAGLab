@@ -1,0 +1,246 @@
+/* Контейнер графа */
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Заголовок графа */
+.graph-header {
+    padding: 16px 24px;
+    background: #f8fafd;
+    border-bottom: 1px solid #eef2f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.graph-header h3 {
+    color: #0b2b4f;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.graph-header h3 span {
+    background: #e2eaf8;
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1e3a5f;
+}
+
+.graph-stats {
+    display: flex;
+    gap: 16px;
+}
+
+.graph-stat-item {
+    background: #e2eaf8;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #1e3a5f;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.graph-stat-item span {
+    background: #1f3a6b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 4px;
+}
+
+/* Область отображения графа */
+.graph-view-area {
+    flex: 1;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+}
+
+#graphCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}
+
+/* Панель управления */
+.graph-controls {
+    padding: 12px 24px;
+    background: #f8fafd;
+    border-top: 1px solid #eef2f6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.graph-controls-left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.graph-controls-right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.graph-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    color: #1f3a6b;
+    border: 1px solid #e2e8f0;
+}
+
+.graph-btn:hover {
+    background: #e4ecf7;
+    border-color: #b8ccf0;
+    transform: translateY(-1px);
+}
+
+.graph-btn:active {
+    transform: translateY(0);
+}
+
+.graph-btn.primary {
+    background: #1f3a6b;
+    color: white;
+    border-color: #1f3a6b;
+}
+
+.graph-btn.primary:hover {
+    background: #2c4c8a;
+}
+
+/* Слайдер для зума */
+.graph-zoom-slider {
+    width: 120px;
+    height: 4px;
+    /*-webkit-appearance: none;*/
+    background: #e2e8f0;
+    border-radius: 2px;
+    outline: none;
+}
+
+.graph-zoom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1f3a6b;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(31, 58, 107, 0.3);
+}
+
+.graph-zoom-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1f3a6b;
+    cursor: pointer;
+    border: none;
+}
+
+/* Индикатор загрузки */
+.graph-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    backdrop-filter: blur(2px);
+}
+
+.graph-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #1f3a6b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Информация при наведении */
+.graph-tooltip {
+    position: absolute;
+    background: #1e293b;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+    white-space: nowrap;
+}
+
+.graph-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #1e293b;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .graph-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .graph-controls-left,
+    .graph-controls-right {
+        justify-content: center;
+    }
+    
+    .graph-zoom-slider {
+        width: 100px;
+    }
+}

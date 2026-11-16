@@ -168,7 +168,7 @@ class RAGStore:
         """PDF-байты → список (номер страницы, текст). Пустые страницы пропускаем."""
         try:
             reader = PdfReader(io.BytesIO(content))
-        except Exception as e:
+        except IOError as e:
             logger.warning("RAG: не удалось открыть PDF «%s»: %s", filename, e)
             return []
 
@@ -176,7 +176,7 @@ class RAGStore:
         for i, page in enumerate(reader.pages, start=1):
             try:
                 text = (page.extract_text() or "").strip()
-            except Exception as e:
+            except IOError as e:
                 logger.warning("RAG: страница %d файла «%s»: %s", i, filename, e)
                 text = ""
             if text:

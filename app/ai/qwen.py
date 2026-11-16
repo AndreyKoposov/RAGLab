@@ -1,4 +1,3 @@
-import requests
 from openai import OpenAI
 
 from . import engine
@@ -7,7 +6,7 @@ from . import engine
 class QwenEngine(engine.AIEngine):
     def __init__(self, key: str, model: str, temp: float) -> None:
         super().__init__(1)
-
+        self.temp = temp
         self.model = model
         self.qwen = OpenAI(
             api_key=key,

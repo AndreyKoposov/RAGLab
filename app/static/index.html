@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Chat Bot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онтологический анализ процессов</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/css/table-viewer.css">
+    <link rel="stylesheet" href="/static/css/xml-viewer.css">
+    <link rel="stylesheet" href="/static/css/graph.css">
+    <link rel="stylesheet" href="/static/css/stages.css">
+    <link rel="stylesheet" href="/static/css/entities.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/chat.css">
+    <link rel="stylesheet" href="/static/css/chat-panel.css">
+
     <style>
         * { box-sizing: border-box; }
-        body {
-            font-family: system-ui, sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 0 16px;
-            background: #f5f5f5;
-        }
-        h1 { font-size: 20px; }
+
         #messages {
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -54,18 +57,88 @@
     </style>
 </head>
 <body>
-    <h1>💬 Чат с AI-ботом</h1>
-    <div id="messages"></div>
+    <div class="app">
+        <!-- Кнопка скрытия левой панели-->
+        <button class="hide-sidebar-btn" id="hide-leftbar-btn">
+            <span>◀</span>
+        </button>
+        <!-- Левая колонка: список процессов в стиле чатов -->
+        <div id="process-list" class="process-list">
+           <div class="process-list-header">
+               <span id="processCount">📋 Процессы (3)</span>
+               <button class="add-process-btn" id="addProcessBtn" title="Добавить новый процесс">+</button>
+           </div>
+           <div class="process-items" id="processItems">
+               <!-- Процессы будут динамически добавляться сюда -->
+           </div>
+           <!-- Индикатор состояния соединения -->
+            <div class="connection-status process-footer" id="connectionStatus">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span class="status-text" id="loginText">8213531</span>
+            </div>
+        </div>
+        <!-- Центральная колонка: кнопки + контент -->
+        <div class="main-panel">
+            <!-- Кнопки основного меню-->
+            <div class="button-bar">
+                <button class="tab-btn" id="btn1">Структура</button>
+                <button class="tab-btn" id="btn2">Анализ</button>
+                <button class="tab-btn" id="btn3">Онтология</button>
+                <button class="tab-btn" id="btn4">Предиктивная модель</button>
+            </div>
+            <!-- Кнопки под-меню -->
+            <div class="button-bar" id="sub-btn-bar">
+            </div>
 
-    <form id="form">
-        <!-- Кнопка-обёртка над скрытым input -->
-        <label for="fileInput" class="attach-btn" id="attachBtn" title="Прикрепить PDF">📎</label>
-        <input id="fileInput" type="file" accept="application/pdf,.pdf" />
+            <!-- Динамический контент -->
+            <div class="content-area" id="contentArea">
+            </div>
+        </div>
+        <!-- Правая колонка: чат с ИИ -->
+        <div class="chat-panel" id="chatPanel">
+            <h1 class="chat-title">💬 Чат с AI-ботом</h1>
 
-        <input id="input" type="text" placeholder="Напиши сообщение..." autocomplete="off" />
-        <button type="submit" id="send">Отправить</button>
-    </form>
+            <div id="messages"></div>
 
-    <script src="/static/script.js"></script>
+            <form id="form">
+                <label for="fileInput" class="attach-btn" id="attachBtn" title="Прикрепить PDF">📎</label>
+                <input id="fileInput" type="file" accept="application/pdf,.pdf" />
+                <input id="input" type="text" placeholder="Напиши сообщение..." autocomplete="off" />
+                <button type="submit" id="send">Отправить</button>
+            </form>
+        </div>
+        <button class="hide-sidebar-btn" id="hide-rightbar-btn">
+            <span>▶</span>
+        </button>
+        <script src="/static/js/script.js"></script>
+        <!-- Шаблоны html -->
+    <script src="/static/js/html/pdf-viewer.html.js"></script>
+    <script src="/static/js/html/table-viewer.html.js"></script>
+    <script src="/static/js/html/xml-viewer.html.js"></script>
+    <script src="/static/js/html/simulation.html.js"></script>
+    <script src="/static/js/html/stats.html.js"></script>
+    <script src="/static/js/html/graph.html.js"></script>
+    <script src="/static/js/html/entities.html.js"></script>
+    <script src="/static/js/html/stages.html.js"></script>
+    <script src="/static/js/html/params.html.js"></script>
+    <!-- Скрипты вкладки "Онтология" -->
+    <script src="/static/js/model/table-viewer.js"></script>
+    <script src="/static/js/model/model.js"></script>
+    <!-- Скрипты вкладки "Онтология" -->
+    <script src="/static/js/ontology/xml-viewer.js"></script>
+    <script src="/static/js/ontology/ontology.js"></script>
+    <!-- Скрипты вкладки "Анализ" -->
+    <script src="/static/js/analyze/graph.js"></script>
+    <script src="/static/js/analyze/analyze.js"></script>
+    <!-- Скрипты вкладки "Структура" -->
+    <script src="/static/js/structure/stages.js"></script>
+    <script src="/static/js/structure/entities.js"></script>
+    <script src="/static/js/structure/structure.js"></script>
+    <!-- Вспомогательные скрипты: api вызовы, чат с ИИ, проверка соединения -->
+    <script src="/static/js/checker.js"></script>
+    <script src="/static/js/chat.js"></script>
+    <script src="/static/js/api.js"></script>
+    <!-- Главный скрипт запуска приложения -->
+    <script src="/static/js/main.js"></script>
 </body>
 </html>

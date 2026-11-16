@@ -1,0 +1,41 @@
+.chat-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;              /* занять всю высоту .app */
+    min-height: 0;             /* критично для скролла #messages внутри flex */
+    padding: 16px;
+    background: #fafafa;
+    border-left: 1px solid #e0e0e0;
+    position: relative;        /* для абсолютной кнопки скрытия */
+    box-sizing: border-box;
+}
+
+/* Заголовок не должен «съедать» высоту и центрироваться */
+.chat-title {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;        /* если хочется по центру; можно left */
+    flex: 0 0 auto;
+}
+
+/* Сообщения занимают всё свободное место и скроллятся */
+#messages {
+    flex: 1 1 auto;
+    min-height: 0;             /* без этого flex-элемент не сжимается и скролл не работает */
+    overflow-y: auto;
+    margin-bottom: 12px;
+}
+
+/* Форма ввода — фиксирована внизу, не сжимается */
+#form {
+    flex: 0 0 auto;
+}
+
+/* Кнопка скрытия — в углу панели, не ломает поток */
+#hide-rightbar-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+}

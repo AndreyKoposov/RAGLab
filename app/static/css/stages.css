@@ -1,0 +1,395 @@
+/* Контейнер структуры процесса */
+.process-structure-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Заголовок */
+.process-structure-header {
+    padding: 16px 24px;
+    background: #f8fafd;
+    border-bottom: 1px solid #eef2f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.process-structure-header h3 {
+    color: #0b2b4f;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.process-structure-header h3 span {
+    background: #e2eaf8;
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1e3a5f;
+}
+
+.process-structure-badge {
+    background: #1f3a6b;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Основная область с тремя колонками */
+.process-structure-content {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+    background: #ffffff;
+}
+
+/* Общие стили для колонок */
+.structure-column {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #eef2f6;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.structure-column:last-child {
+    border-right: none;
+}
+
+/* Левая колонка (этапы) */
+.column-stages {
+    width: 25%;
+    min-width: 220px;
+}
+
+/* Центральная колонка (параметры) */
+.column-parameters {
+    width: 40%;
+    min-width: 320px;
+}
+
+/* Правая колонка (информация) */
+.column-info {
+    width: 35%;
+    min-width: 280px;
+}
+
+/* Заголовки колонок */
+.column-header {
+    padding: 16px 20px;
+    background: #f8fafd;
+    border-bottom: 1px solid #eef2f6;
+    font-weight: 600;
+    color: #0b2b4f;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.column-header-count {
+    background: #e2eaf8;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #1e3a5f;
+}
+
+/* Содержимое колонок со скроллом */
+.column-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    min-height: 0;
+}
+
+/* Стилизация скролла */
+.column-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.column-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.column-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+/* Список этапов */
+.stages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stage-item {
+    padding: 14px 16px;
+    background: white;
+    border: 1px solid #edf2f7;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.stage-item:hover {
+    background: #f0f4fe;
+    border-color: #bdd3f0;
+    transform: translateX(2px);
+}
+
+.stage-item.selected {
+    background: #e1eaf8;
+    border-color: #1f3a6b;
+    border-left-width: 4px;
+    box-shadow: 0 4px 12px rgba(31, 58, 107, 0.15);
+}
+
+.stage-name {
+    font-weight: 600;
+    color: #0b2b4f;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.stage-meta {
+    font-size: 12px;
+    color: #64748b;
+    display: flex;
+    gap: 12px;
+}
+
+.stage-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Категории параметров */
+.parameters-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.parameter-category {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #edf2f7;
+    overflow: hidden;
+}
+
+.category-header {
+    padding: 12px 16px;
+    background: #f8fafd;
+    font-weight: 600;
+    color: #0b2b4f;
+    font-size: 14px;
+    border-bottom: 1px solid #edf2f7;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-header-icon {
+    font-size: 16px;
+}
+
+.category-items {
+    padding: 8px;
+}
+
+.parameter-item {
+    padding: 12px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-bottom: 4px;
+    border: 1px solid transparent;
+}
+
+.parameter-item:hover {
+    background: #f0f4fe;
+    border-color: #bdd3f0;
+}
+
+.parameter-item.selected {
+    background: #e1eaf8;
+    border-color: #1f3a6b;
+    box-shadow: 0 2px 8px rgba(31, 58, 107, 0.1);
+}
+
+.parameter-name {
+    font-weight: 500;
+    color: #0b2b4f;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.parameter-type {
+    font-size: 11px;
+    color: #64748b;
+    display: flex;
+    gap: 8px;
+}
+
+.parameter-type-badge {
+    background: #dee9fc;
+    color: #1f3a6b;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+/* Информация о параметре */
+.parameter-info {
+    padding: 8px 4px;
+}
+
+.info-section {
+    margin-bottom: 24px;
+}
+
+.info-section-title {
+    font-weight: 600;
+    color: #0b2b4f;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.info-label {
+    min-width: 80px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.info-value {
+    flex: 1;
+    font-size: 14px;
+    color: #0b2b4f;
+    font-weight: 500;
+}
+
+.info-description {
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.6;
+    background: #f8fafd;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #edf2f7;
+}
+
+.info-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: #94a3b8;
+    text-align: center;
+    gap: 12px;
+}
+
+.info-empty-icon {
+    font-size: 48px;
+    opacity: 0.5;
+}
+
+.info-empty-text {
+    font-size: 14px;
+}
+
+/* Индикатор загрузки */
+.structure-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    backdrop-filter: blur(2px);
+}
+
+.structure-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #1f3a6b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .structure-column {
+        min-width: auto;
+    }
+    
+    .column-stages {
+        width: 30%;
+    }
+    
+    .column-parameters {
+        width: 40%;
+    }
+    
+    .column-info {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-structure-content {
+        flex-direction: column;
+    }
+    
+    .structure-column {
+        width: 100%;
+        height: 33.333%;
+        border-right: none;
+        border-bottom: 1px solid #eef2f6;
+    }
+    
+    .structure-column:last-child {
+        border-bottom: none;
+    }
+}
